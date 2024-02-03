@@ -1,0 +1,26 @@
+﻿@model Todolist.Models.Task
+
+@{
+    ViewData["Title"] = "Add Task";
+}
+
+<div class="addtask">
+<h2 class="addnewtasktitle">Add new task</h2>
+    <form method="post" asp-action="Add">
+        <div class="TaskTitleDiv">
+            
+            <input type="text" class="task_title" asp-for="Title" placeholder="Task title">
+        </div>
+        <div class="TaskDescDiv">
+           
+            <textarea class="task_desc" asp-for="Description" placeholder="Task description"></textarea>
+        </div>
+    
+        <hr />
+        <div class="container">
+            <button type="submit" class="btn btn-success">Save task</button>
+            <button asp-action="Index" class="btn btn-secondary">Cancel</button>
+        </div>
+    </form>
+
+</div>
