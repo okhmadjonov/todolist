@@ -46,3 +46,4 @@ C:\Users\nemo\Desktop\2024\.net\todolist\Todolist\obj\Debug\net7.0\refint\Todoli
 C:\Users\nemo\Desktop\2024\.net\todolist\Todolist\obj\Debug\net7.0\Todolist.pdb
 C:\Users\nemo\Desktop\2024\.net\todolist\Todolist\obj\Debug\net7.0\Todolist.genruntimeconfig.cache
 C:\Users\nemo\Desktop\2024\.net\todolist\Todolist\obj\Debug\net7.0\ref\Todolist.dll
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\obj\Debug\net7.0\Todolist.sourcelink.json

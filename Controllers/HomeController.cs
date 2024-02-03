@@ -30,6 +30,7 @@ namespace Todolist.Controllers
             return View();
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> Add(Models.Task taskDto)
         {
@@ -38,7 +39,10 @@ namespace Todolist.Controllers
                 await _taskRepository.AddTask(taskDto);
                 return RedirectToAction("Index");
             }
-            return View(taskDto);
+            else
+            {
+                return View(taskDto);
+            }
         }
 
         [HttpGet]
@@ -53,7 +57,7 @@ namespace Todolist.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Models.Dtos.TaskDto taskDto)
+        public async Task<IActionResult> Edit(int id, Models.Task taskDto)
         {
            
 
@@ -91,15 +95,15 @@ namespace Todolist.Controllers
             try
             {
                 var task = await _taskRepository.GetTaskById(id);
-                var taskDto = _mapper.Map<TaskDto>(task);
+                //var taskDto = _mapper.Map<TaskDto>(task);
                 if (task == null)
                 {
                     return NotFound();
                 }
 
-                taskDto.IsCompleted = isCompleted;
+                task.IsCompleted = isCompleted;
 
-                await _taskRepository.UpdateTask(id,taskDto); 
+                await _taskRepository.UpdateTask(id,task); 
 
                 return Ok();
             }

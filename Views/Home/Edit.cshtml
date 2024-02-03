@@ -7,21 +7,23 @@
 <div class="addtask">
     <h2 class="addnewtasktitle">Update task</h2>
     <form method="post" asp-action="Edit">
+        <div class="validation-summary-errors" style="color: #fff">
+            @Html.ValidationSummary(false, "")
+        </div>
         <div class="TaskTitleDiv">
-
             <input type="text" class="task_title" asp-for="Title" placeholder="Task title">
+
         </div>
         <div class="TaskDescDiv">
-
             <textarea class="task_desc" asp-for="Description" placeholder="Task description"></textarea>
+
         </div>
-      
-       
-        <hr />
+        <input type="hidden" asp-for="Id" />
+        <br />
+        <hr style="color:white" />
         <div class="container">
             <button type="submit" class="btn btn-success">Save changes</button>
             <button asp-action="Index" class="btn btn-secondary">Cancel</button>
         </div>
     </form>
-
 </div>

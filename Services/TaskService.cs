@@ -19,7 +19,7 @@ namespace Todolist.Services
 
         public async Task<IEnumerable<Models.Task>> GetAllTasks()
         {
-            var tasks =  await _context.Tasks
+            var tasks = await  _context.Tasks
                 .OrderBy(t => t.IsCompleted)
                 .ToListAsync();
 
@@ -37,7 +37,7 @@ namespace Todolist.Services
             await _context.SaveChangesAsync();
         }
 
-        public async System.Threading.Tasks.Task UpdateTask(int id, Models.Dtos.TaskDto task)
+        public async System.Threading.Tasks.Task UpdateTask(int id, Models.Task task)
         {
             var foundTask = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
             if (foundTask != null)

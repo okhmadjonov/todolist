@@ -5,10 +5,15 @@ namespace Todolist.Models
     public class Task
     {
         public int Id { get; set; }
-        [Required(ErrorMessage ="Title is required")]
+
+        [Required(ErrorMessage = "Task title is required")]
+        [RegularExpression(@"^(?![0-9]+$).*$", ErrorMessage = "Task title must not contain only numbers")]
         public string Title { get; set; }
-        [Required(ErrorMessage = "Description is required")]
+
+        [Required(ErrorMessage = "Task description is required")]
+        [RegularExpression(@"^(?![0-9]+$).*$", ErrorMessage = "Task description must not contain only numbers")]
         public string Description { get; set; }
+
         public bool IsCompleted { get; set; } = false;
     }
 }
