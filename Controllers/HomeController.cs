@@ -27,9 +27,8 @@ namespace Todolist.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             int pageSize = 3;
-            var tasks = await _taskRepository.GetAllTasks();
-
             var pageNumber = page ?? 1;
+            var tasks = await _taskRepository.GetAllTasks();
             var paginatedTasks = tasks.ToPagedList(pageNumber, pageSize);
 
             return View(paginatedTasks);

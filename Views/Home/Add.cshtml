@@ -9,7 +9,7 @@
     <form method="post" asp-action="Add">
 
         <div class="validation-summary-errors" style="color: #fff">
-            @Html.ValidationSummary(false, "")
+            @Html.ValidationSummary()
         </div>
         <div class="TaskTitleDiv">
             <input type="text" class="task_title" asp-for="Title" placeholder="Task title">
@@ -23,7 +23,7 @@
         <hr style="color:white" />
         <div class="container">
             <button type="submit" class="btn btn-success">Save task</button>
-            <button asp-action="Index" class="btn btn-secondary">Cancel</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>

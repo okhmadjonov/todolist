@@ -163,11 +163,11 @@ a{
     }
 
 input:checked + .slider {
-    background-color: darkred;
+    background-color: #4BD70D;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px darkred;
+    box-shadow: 0 0 1px #4BD70D;
 }
 
 input:checked + .slider:before {
