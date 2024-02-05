@@ -47,3 +47,10 @@ C:\Users\nemo\Desktop\2024\.net\todolist\Todolist\obj\Debug\net7.0\Todolist.pdb
 C:\Users\nemo\Desktop\2024\.net\todolist\Todolist\obj\Debug\net7.0\Todolist.genruntimeconfig.cache
 C:\Users\nemo\Desktop\2024\.net\todolist\Todolist\obj\Debug\net7.0\ref\Todolist.dll
 C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\obj\Debug\net7.0\Todolist.sourcelink.json
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\PagedList.dll
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\PagedList.Mvc.dll
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\X.PagedList.dll
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\X.PagedList.Mvc.Common.dll
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\obj\Debug\net7.0\Todolist.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\Mvc.Grid.Core.dll

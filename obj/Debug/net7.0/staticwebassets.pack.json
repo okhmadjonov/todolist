@@ -5,12 +5,24 @@
       "PackagePath": "staticwebassets\\Todolist.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\nemo\\Desktop\\2024\\.net\\todolist\\ToDoList\\wwwroot\\css\\mvc-grid\\fonts\\grid-glyphs.woff",
+      "PackagePath": "staticwebassets\\css\\mvc-grid\\fonts\\grid-glyphs.woff"
+    },
+    {
+      "Id": "C:\\Users\\nemo\\Desktop\\2024\\.net\\todolist\\ToDoList\\wwwroot\\css\\mvc-grid\\mvc-grid.css",
+      "PackagePath": "staticwebassets\\css\\mvc-grid\\mvc-grid.css"
+    },
+    {
       "Id": "C:\\Users\\nemo\\Desktop\\2024\\.net\\todolist\\ToDoList\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\nemo\\Desktop\\2024\\.net\\todolist\\ToDoList\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\nemo\\Desktop\\2024\\.net\\todolist\\ToDoList\\wwwroot\\js\\mvc-grid\\mvc-grid.js",
+      "PackagePath": "staticwebassets\\js\\mvc-grid\\mvc-grid.js"
     },
     {
       "Id": "C:\\Users\\nemo\\Desktop\\2024\\.net\\todolist\\ToDoList\\wwwroot\\js\\site.js",

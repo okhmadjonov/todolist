@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 using Todolist.Services;
 using Todolist.Models.Dtos;
 using AutoMapper;
+using System.Linq;
+
+using X.PagedList;
+
+
 
 namespace Todolist.Controllers
 {
@@ -18,10 +23,16 @@ namespace Todolist.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(int? page)
         {
+            int pageSize = 3;
             var tasks = await _taskRepository.GetAllTasks();
-            return View(tasks);
+
+            var pageNumber = page ?? 1;
+            var paginatedTasks = tasks.ToPagedList(pageNumber, pageSize);
+
+            return View(paginatedTasks);
         }
 
         [HttpGet]
@@ -92,10 +103,9 @@ namespace Todolist.Controllers
         [HttpPost]
         public async Task<IActionResult> MarkCompleted(int id, bool isCompleted)
         {
-            try
-            {
+           
                 var task = await _taskRepository.GetTaskById(id);
-                //var taskDto = _mapper.Map<TaskDto>(task);
+               
                 if (task == null)
                 {
                     return NotFound();
@@ -106,14 +116,6 @@ namespace Todolist.Controllers
                 await _taskRepository.UpdateTask(id,task); 
 
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-               
-                return StatusCode(500, "An error occurred while marking task as completed.");
-            }
         }
-
-
     }
 }

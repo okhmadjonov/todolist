@@ -72,9 +72,29 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "NonFactors.Grid.Core.Mvc6": {
+              "target": "Package",
+              "version": "[7.2.0, )"
+            },
+            "NonFactors.Grid.Mvc6": {
+              "target": "Package",
+              "version": "[7.2.0, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "PagedList": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            },
+            "PagedList.Mvc": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[7.2.0, )"
             }
           },
           "imports": [
