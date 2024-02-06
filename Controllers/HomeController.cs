@@ -24,15 +24,24 @@ namespace Todolist.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index(int? page, string title)
         {
             int pageSize = 3;
             var pageNumber = page ?? 1;
             var tasks = await _taskRepository.GetAllTasks();
+
+            var searchTitle = title?.ToLower();
+
+            if (!string.IsNullOrEmpty(searchTitle))
+            {
+                tasks = tasks.Where(t => t.Title.ToLower().Contains(searchTitle)).ToList();
+            }
+
             var paginatedTasks = tasks.ToPagedList(pageNumber, pageSize);
 
             return View(paginatedTasks);
         }
+
 
         [HttpGet]
         public IActionResult Add()
@@ -40,7 +49,7 @@ namespace Todolist.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         public async Task<IActionResult> Add(Models.Task taskDto)
         {
@@ -55,13 +64,14 @@ namespace Todolist.Controllers
             }
         }
 
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var task = await _taskRepository.GetTaskById(id);
             if (task == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             return View(task);
         }
@@ -76,7 +86,7 @@ namespace Todolist.Controllers
                 await _taskRepository.UpdateTask(id, taskDto);
                 return RedirectToAction("Index");
             }
-            return View(taskDto);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -86,7 +96,7 @@ namespace Todolist.Controllers
 
             if (task == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
             return View(task);
         }
@@ -116,5 +126,18 @@ namespace Todolist.Controllers
 
                 return Ok();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var task = await _taskRepository.GetTaskById(id);
+            if (task == null)
+            {
+                return RedirectToAction("Index"); 
+            }
+            return View(task);
+        }
+
+
     }
 }

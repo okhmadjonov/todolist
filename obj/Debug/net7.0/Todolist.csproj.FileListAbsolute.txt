@@ -54,3 +54,4 @@ C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\X.PagedList.M
 C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
 C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\obj\Debug\net7.0\Todolist.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\Mvc.Grid.Core.dll
+C:\Users\nemo\Desktop\2024\.net\todolist\ToDoList\bin\Debug\net7.0\System.Security.Permissions.dll

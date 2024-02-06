@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Todolist.Models
 {
@@ -13,6 +14,14 @@ namespace Todolist.Models
         [Required(ErrorMessage = "Task description is required")]
         [RegularExpression(@"^(?![0-9]+$).*$", ErrorMessage = "Task description must not contain only numbers")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Task create date is required")]
+       
+        public DateTime StartDate { get; set; }
+
+        [Required(ErrorMessage = "Task expire date is required")]
+        
+        public DateTime EndDate { get; set; }
 
         public bool IsCompleted { get; set; } = false;
     }

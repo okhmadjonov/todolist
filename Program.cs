@@ -10,9 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ContextName")));
 
-builder.Services.AddTransient<ITaskRepository, TaskService>();
+builder.Services.AddScoped<ITaskRepository, TaskService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProvider).Assembly);
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 var app = builder.Build();
 
 

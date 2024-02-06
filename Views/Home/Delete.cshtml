@@ -8,12 +8,22 @@
     <h2 class="addnewtasktitle">Are you sure to delete ?</h2>
     <form method="post" asp-action="DeleteConfirmed">
         <div class="TaskTitleDiv">
+            <input type="text" class="task_title" disabled asp-for="Title" placeholder="Task title">
 
-            <input disabled type="text" class="task_title" asp-for="Title" placeholder="Task title">
         </div>
         <div class="TaskDescDiv">
+            <textarea class="task_desc" disabled asp-for="Description" placeholder="Task description"></textarea>
 
-            <textarea disabled class="task_desc" asp-for="Description" placeholder="Task description"></textarea>
+        </div>
+        <div class="TaskCreateDiv">
+            <label>Create Date</label>
+            <input type="date" class="task_created_date" disabled asp-for="StartDate">
+
+        </div>
+        <div class="TaskExpireDiv">
+            <label>Expire Date</label>
+            <input type="date" class="task_expire_date" disabled asp-for="EndDate">
+
         </div>
 
         <input type="hidden" asp-for="Id" />
@@ -26,4 +36,5 @@
     </form>
 
 </div>
+
 

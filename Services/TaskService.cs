@@ -5,6 +5,8 @@ using Todolist.Data;
 using Microsoft.EntityFrameworkCore;
 using Todolist.Repositories;
 using System.Xml.Serialization;
+using Microsoft.AspNetCore.Http.HttpResults;
+using System;
 
 namespace Todolist.Services
 {
@@ -21,6 +23,7 @@ namespace Todolist.Services
         {
             var tasks = await  _context.Tasks
                 .OrderBy(t => t.IsCompleted)
+                .ThenBy(t=> t.Id)
                 .ToListAsync();
 
             return tasks;
@@ -28,12 +31,13 @@ namespace Todolist.Services
 
         public  async Task<Models.Task> GetTaskById(int id)
         {
-            return await _context.Tasks.FirstOrDefaultAsync(task=>task.Id==id);
+            return await _context.Tasks.FirstOrDefaultAsync(task => task.Id == id);
         }
 
         public async System.Threading.Tasks.Task AddTask(Models.Task task)
         {
-             await _context.Tasks.AddAsync(task);
+   
+            await _context.Tasks.AddAsync(task);
             await _context.SaveChangesAsync();
         }
 
@@ -44,6 +48,8 @@ namespace Todolist.Services
             {
                 foundTask.Title = task.Title;
                 foundTask.Description = task.Description;
+                foundTask.StartDate = task.StartDate;
+                foundTask.EndDate = task.EndDate;
                 foundTask.IsCompleted = task.IsCompleted;
                 await _context.SaveChangesAsync();
             }
@@ -58,6 +64,7 @@ namespace Todolist.Services
                 _context.Tasks.Remove(task);
                 await _context.SaveChangesAsync();
             }
+           
         }
     }
 }

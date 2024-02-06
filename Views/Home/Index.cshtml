@@ -10,6 +10,11 @@
         <a class="addnewtask" asp-controller="Home" asp-action="Add">
             <i class="fa-solid fa-plus"></i> Add new task
         </a>
+        <form class="searchTask" method="get" asp-action="Index" asp-controller="Home">
+            <input type="search" name="title" value="@ViewData["CurrentFilter"]" placeholder="Search task here ..." />
+            <button class="searchBtn" type="submit">Search</button>
+        </form>
+
     </div>
     <hr style="color: #fff" />
 
@@ -17,45 +22,39 @@
         <div class="task_list">
             @foreach (var task in Model)
             {
-
-
-                <div class="task_item">
-                    <div class="task_item_title">@task.Id:  @task.Title</div>
-                    <div class="task_item_desc">@task.Description</div>
-                    <div class="task_item_complete">
-                        <label class="switch">
-                            <input type="checkbox" class="toggle-task" data-task-id="@task.Id" @(task.IsCompleted ? "checked" : "")>
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="task-status">@((task.IsCompleted ? "Completed" : "Not Completed"))</span>
+              
+                    <div class="task_item" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'" >
+                        <div class="task_item_title">@task.Title</div>
+                        <div class="task_item_desc">@task.Description</div>
+                        <div class="task_item_cd">
+                            <p> Created day: </p>
+                            <p> @task.StartDate.ToString("dd/MM/yyyy")</p>
+                        </div>
+                        <div class="task_item_ed">
+                            <p>Expire day:</p>
+                            <p>@task.EndDate.ToString("dd/MM/yyyy")</p>
+                        </div>
+                        <div class="task_item_complete">
+                            <label class="switch">
+                                <input type="checkbox" class="toggle-task" data-task-id="@task.Id" @(task.IsCompleted ? "checked" : "")>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="task-status">@((task.IsCompleted ? "Completed" : "Not Completed"))</span>
+                        </div>
+                        <div class="task_item_actions">
+                            <a class="edit" asp-controller="Home" asp-action="Edit" asp-route-id="@task.Id">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a class="delete" asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="task_item_actions">
-                        <a class="edit" asp-controller="Home" asp-action="Edit" asp-route-id="@task.Id">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a class="delete" asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
-                    </div>
-                </div>
-
-
-
-
-
+              
             }
+
         </div>
-
-
         <div class="pager">
-
-
-            @*<a href="?page=@(ViewBag.PageNumber - 1)" class="prev"><i class="fa-solid fa-chevron-left"></i></a>
-
-
-                <a href="?page=@(ViewBag.PageNumber + 1)" class="next"><i class="fa-solid fa-chevron-right"></i></a>*@
-
-            <!-- Pagination -->
             <div class="pagination-container text-center mt-4">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
@@ -69,7 +68,6 @@
                                 <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
                             </li>
                         }
-
                         <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
                             <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount })">Last</a>
                         </li>
@@ -77,13 +75,11 @@
                 </nav>
             </div>
         </div>
-
-
-
     </div>
+
+
+
 </div>
-
-
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
@@ -113,8 +109,13 @@
             });
         });
     });
-
-
-
+    $(document).ready(function () {
+        $('.task_item').click(function (e) {
+            e.preventDefault(); 
+            var url = $(this).attr('href'); 
+            window.location.href = url; 
+        });
+    });
 </script>
+
 

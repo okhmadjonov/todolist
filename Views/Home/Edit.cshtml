@@ -7,8 +7,8 @@
 <div class="addtask">
     <h2 class="addnewtasktitle">Update task</h2>
     <form method="post" asp-action="Edit">
-        <div class="validation-summary-errors" style="color: #fff">
-            @Html.ValidationSummary(false, "")
+        <div class="validation-summary-errors" style="color: #ff0000">
+            @Html.ValidationSummary()
         </div>
         <div class="TaskTitleDiv">
             <input type="text" class="task_title" asp-for="Title" placeholder="Task title">
@@ -16,6 +16,16 @@
         </div>
         <div class="TaskDescDiv">
             <textarea class="task_desc" asp-for="Description" placeholder="Task description"></textarea>
+
+        </div>
+        <div class="TaskCreateDiv">
+            <label>Create Date</label>
+            <input type="date" id="taskCreateDate" class="task_created_date" asp-for="StartDate" >
+
+        </div>
+        <div class="TaskExpireDiv">
+            <label>Expire Date</label>
+            <input type="date" id="taskExpireDate" class="task_expire_date" asp-for="EndDate" >
 
         </div>
         <input type="hidden" asp-for="Id" />
@@ -27,3 +37,25 @@
         </div>
     </form>
 </div>
+
+
+
+
+<script type="text/javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var minDate = yyyy + '-' + mm + '-' + dd;
+
+    document.getElementById('taskCreateDate').min = minDate;
+    document.getElementById('taskExpireDate').min = minDate;
+
+    document.getElementById('taskCreateDate').addEventListener('change', function () {
+        document.getElementById('taskExpireDate').min = this.value;
+    });
+
+    document.getElementById('taskExpireDate').addEventListener('change', function () {
+        document.getElementById('taskCreateDate').max = this.value;
+    });
+</script>
