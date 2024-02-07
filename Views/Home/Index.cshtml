@@ -23,34 +23,42 @@
             @foreach (var task in Model)
             {
               
-                    <div class="task_item" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'" >
-                        <div class="task_item_title">@task.Title</div>
-                        <div class="task_item_desc">@task.Description</div>
-                        <div class="task_item_cd">
-                            <p> Created day: </p>
-                            <p> @task.StartDate.ToString("dd/MM/yyyy")</p>
-                        </div>
-                        <div class="task_item_ed">
-                            <p>Expire day:</p>
-                            <p>@task.EndDate.ToString("dd/MM/yyyy")</p>
-                        </div>
-                        <div class="task_item_complete">
-                            <label class="switch">
-                                <input type="checkbox" class="toggle-task" data-task-id="@task.Id" @(task.IsCompleted ? "checked" : "")>
-                                <span class="slider round"></span>
-                            </label>
-                            <span class="task-status">@((task.IsCompleted ? "Completed" : "Not Completed"))</span>
-                        </div>
-                        <div class="task_item_actions">
-                            <a class="edit" asp-controller="Home" asp-action="Edit" asp-route-id="@task.Id">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                            <a class="delete" asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                        </div>
-                    </div>
-              
+
+            <div class="task_item ">
+
+                <button class="priority"
+                        style="background-color: 
+                        @(task.Priority == Priority.Low ? "green" :
+                        task.Priority == Priority.Medium ? "tomato" : 
+                        "darkred")"> @task.Priority</button>
+
+                <div class="task_item_title" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'">@task.Title</div>
+                <div class="task_item_desc" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'">@task.Description</div>
+                <div class="task_item_cd">
+                    <p> Created day: </p>
+                    <p> @task.StartDate.ToString("dd/MM/yyyy")</p>
+                </div>
+                <div class="task_item_ed">
+                    <p>Expire day:</p>
+                    <p>@task.EndDate.ToString("dd/MM/yyyy")</p>
+                </div>
+                <div class="task_item_complete">
+                    <label class="switch">
+                        <input type="checkbox" class="toggle-task" data-task-id="@task.Id" @(task.IsCompleted ? "checked" : "")>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="task-status">@((task.IsCompleted ? "Completed" : "Not Completed"))</span>
+                </div>
+                <div class="task_item_actions">
+                    <a class="edit" asp-controller="Home" asp-action="Edit" asp-route-id="@task.Id">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a class="delete" asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+
             }
 
         </div>
@@ -110,10 +118,15 @@
         });
     });
     $(document).ready(function () {
-        $('.task_item').click(function (e) {
+        $('.task_item_title').click(function (e) {
             e.preventDefault(); 
             var url = $(this).attr('href'); 
             window.location.href = url; 
+        });
+        $('.task_item_desc').click(function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            window.location.href = url;
         });
     });
 </script>

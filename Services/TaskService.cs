@@ -22,7 +22,7 @@ namespace Todolist.Services
         public async Task<IEnumerable<Models.Task>> GetAllTasks()
         {
             var tasks = await  _context.Tasks
-                .OrderBy(t => t.IsCompleted)
+                .OrderByDescending(t => t.Priority)
                 .ThenBy(t=> t.Id)
                 .ToListAsync();
 
@@ -48,6 +48,7 @@ namespace Todolist.Services
             {
                 foundTask.Title = task.Title;
                 foundTask.Description = task.Description;
+                foundTask.Priority = task.Priority;
                 foundTask.StartDate = task.StartDate;
                 foundTask.EndDate = task.EndDate;
                 foundTask.IsCompleted = task.IsCompleted;
