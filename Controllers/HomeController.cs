@@ -24,7 +24,7 @@ namespace Todolist.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int? page, string title)
+        public async Task<IActionResult> Index(FilterViewModel filter, int? page, string title)
         {
             int pageSize = 3;
             var pageNumber = page ?? 1;
@@ -37,10 +37,56 @@ namespace Todolist.Controllers
                 tasks = tasks.Where(t => t.Title.ToLower().Contains(searchTitle)).ToList();
             }
 
+           
+            bool tasksFound = true;
+            ViewData["CurrentFilter"] = title;
+
+            if (filter != null)
+            {
+                var priority = filter.Priority;
+                var completed = filter.IsCompleted;
+                var startDate = filter.StartDate;
+                var endDate = filter.EndDate;
+
+              
+                if (priority.HasValue)
+                {
+                    tasks = tasks.Where(t => t.Priority == priority.Value).ToList();
+                }
+
+               
+                if (completed.HasValue)
+                {
+                    tasks = tasks.Where(t => t.IsCompleted == completed.Value).ToList();
+                }
+
+                
+                if (startDate.HasValue)
+                {
+                    tasks = tasks.Where(t => t.StartDate >= startDate.Value).ToList();
+                }
+
+               
+                if (endDate.HasValue)
+                {
+                    tasks = tasks.Where(t => t.EndDate <= endDate.Value).ToList();
+                }
+
+               
+                if (tasks.Count() == 0)
+                {
+                    tasksFound = false;
+                }
+            }
+
             var paginatedTasks = tasks.ToPagedList(pageNumber, pageSize);
+
+            
+            ViewBag.TasksFound = tasksFound;
 
             return View(paginatedTasks);
         }
+
 
 
         [HttpGet]

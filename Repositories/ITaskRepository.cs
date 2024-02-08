@@ -11,5 +11,7 @@ namespace Todolist.Repositories
         System.Threading.Tasks.Task  UpdateTask(int id,Models.Task task);
         System.Threading.Tasks.Task  DeleteTask(int id);
 
+
+        IQueryable<Models.Task> FilterTasks(Priority? priority, bool? completed, DateTime? startDate, DateTime? endDate);
     }
 }

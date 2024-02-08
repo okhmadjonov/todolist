@@ -10,54 +10,108 @@
         <a class="addnewtask" asp-controller="Home" asp-action="Add">
             <i class="fa-solid fa-plus"></i> Add new task
         </a>
+
+        <button class="searchBtn" data-toggle="modal" data-target="#filterModal" type="submit">Filter</button>
+
+        <div class="modal" id="filterModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Filter Tasks</h5>
+                        <button type="button" style="width:30px; border:none; color:red;" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="filterForm" method="get" asp-action="Index" asp-controller="Home">
+                            <div class="form-group">
+                                <label for="priority">Priority:</label>
+                                <select class="form-control" id="priority" name="priority">
+                                    <option>Select Priority</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="completed">Completed:</label>
+                                <select class="form-control" id="completed" name="iscompleted">
+                                    <option>Completed or Not Completed</option>
+                                    <option value="true">Completed</option>
+                                    <option value="false">Not Completed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate">Start Date:</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">End Date:</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate">
+                            </div>
+                            <br />
+                            <hr />
+                            <button type="submit" class="btn btn-success">Apply</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <form class="searchTask" method="get" asp-action="Index" asp-controller="Home">
             <input type="search" name="title" value="@ViewData["CurrentFilter"]" placeholder="Search task here ..." />
             <button class="searchBtn" type="submit">Search</button>
         </form>
 
+
     </div>
     <hr style="color: #fff" />
 
     <div class="home_container">
+     
         <div class="task_list">
+
+            @if (!ViewBag.TasksFound)
+            {
+                <p class="taskNotNoFound">Task not found</p>
+            }
             @foreach (var task in Model)
             {
-              
-
-            <div class="task_item ">
-
-                <button class="priority"
-                        style="background-color: 
+                <div class="task_item ">
+                    <button class="priority"
+                            style="background-color:
                         @(task.Priority == Priority.Low ? "green" :
-                        task.Priority == Priority.Medium ? "tomato" : 
-                        "darkred")"> @task.Priority</button>
+                        task.Priority == Priority.Medium ? "tomato" :
+                        "darkred")">
+                        @task.Priority
+                    </button>
 
-                <div class="task_item_title" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'">@task.Title</div>
-                <div class="task_item_desc" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'">@task.Description</div>
-                <div class="task_item_cd">
-                    <p> Created day: </p>
-                    <p> @task.StartDate.ToString("dd/MM/yyyy")</p>
+                    <div class="task_item_title" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'">@task.Title</div>
+                    <div class="task_item_desc" onclick="window.location.href='@Url.Action("Details", "Home", new { id = task.Id })'">@task.Description</div>
+                    <div class="task_item_cd">
+                        <p> Created day: </p>
+                        <p> @task.StartDate.ToString("dd/MM/yyyy")</p>
+                    </div>
+                    <div class="task_item_ed">
+                        <p>Expire day:</p>
+                        <p>@task.EndDate.ToString("dd/MM/yyyy")</p>
+                    </div>
+                    <div class="task_item_complete">
+                        <label class="switch">
+                            <input type="checkbox" class="toggle-task" data-task-id="@task.Id" @(task.IsCompleted ? "checked" : "")>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="task-status">@((task.IsCompleted ? "Completed" : "Not Completed"))</span>
+                    </div>
+                    <div class="task_item_actions">
+                        <a class="edit" asp-controller="Home" asp-action="Edit" asp-route-id="@task.Id">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a class="delete" asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="task_item_ed">
-                    <p>Expire day:</p>
-                    <p>@task.EndDate.ToString("dd/MM/yyyy")</p>
-                </div>
-                <div class="task_item_complete">
-                    <label class="switch">
-                        <input type="checkbox" class="toggle-task" data-task-id="@task.Id" @(task.IsCompleted ? "checked" : "")>
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="task-status">@((task.IsCompleted ? "Completed" : "Not Completed"))</span>
-                </div>
-                <div class="task_item_actions">
-                    <a class="edit" asp-controller="Home" asp-action="Edit" asp-route-id="@task.Id">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a class="delete" asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
-                </div>
-            </div>
 
             }
 
@@ -84,12 +138,35 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 
+
+@*/*-------------------------------------------------------------------------------------*/*@
 <script type="text/javascript">
+
+    /********************************Check Date*************************** */
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    var minDate = yyyy + '-' + mm + '-' + dd;
+
+    document.getElementById('startDate').min = '1900-01-01'; // Set a past date, adjust as needed
+    document.getElementById('endDate').min = minDate;
+
+    document.getElementById('startDate').addEventListener('change', function () {
+        document.getElementById('endDate').min = this.value;
+    });
+
+    document.getElementById('endDate').addEventListener('change', function () {
+        document.getElementById('startDate').max = this.value;
+    });
+
+
+
+
+
+
     document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('.toggle-task').forEach(function (toggle) {
             toggle.addEventListener('change', function () {
@@ -117,11 +194,12 @@
             });
         });
     });
+    //****************************Open details page **************************** */
     $(document).ready(function () {
         $('.task_item_title').click(function (e) {
-            e.preventDefault(); 
-            var url = $(this).attr('href'); 
-            window.location.href = url; 
+            e.preventDefault();
+            var url = $(this).attr('href');
+            window.location.href = url;
         });
         $('.task_item_desc').click(function (e) {
             e.preventDefault();
@@ -129,6 +207,34 @@
             window.location.href = url;
         });
     });
+
+    //****************************Filter Modal**************************** */
+
+  
+        $(document).ready(function () {
+            $('#filterForm').submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: 'GET',
+                    url: '/Home/Index',
+                    data: formData,
+                    success: function (response) {
+
+                        $('.task-list').html(response);
+                        $('#filterModal').modal('hide');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+
+
+
+
+
 </script>
 
 

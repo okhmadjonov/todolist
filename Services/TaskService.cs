@@ -67,5 +67,39 @@ namespace Todolist.Services
             }
            
         }
+
+        /*filter tasks*/
+
+        public IQueryable<Models.Task> FilterTasks(Priority? priority, bool? completed, DateTime? startDate, DateTime? endDate)
+        {
+            var query = _context.Tasks.AsQueryable();
+
+           
+            if (priority.HasValue)
+            {
+                query = query.Where(t => t.Priority == priority.Value);
+            }
+
+            if (completed.HasValue)
+            {
+                if (completed.Value)
+                {
+                    query = query.Where(t => t.IsCompleted);
+                }
+                else
+                {
+                    query = query.Where(t => !t.IsCompleted);
+                }
+            }
+
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                query = query.Where(t => t.StartDate >= startDate.Value && t.StartDate <= endDate.Value);
+            }
+
+            return query;
+        }
+
+     
     }
 }

@@ -158,11 +158,11 @@ a{
     font-size: 1em;
     font-weight: 500;
     padding:10px;
-    overflow-y:hidden;
-    word-wrap:break-word;
-    border-bottom:3px solid white;
+    overflow-y: hidden;
+    word-wrap: break-word;
+    border-bottom: 3px solid white;
     font-family: 'Poppins', sans-serif;
-    
+   
 }
 
 
@@ -258,7 +258,7 @@ input:checked + .slider:before {
     height: 80%;
 /*    border-radius: 12px;*/
     border: none;
-    background-color: darkred;
+    background-color: lightcoral;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -368,6 +368,7 @@ input {
     height:150px;
     margin-top:20px;
     border:1px solid white;
+     
 }
 
 textarea {
@@ -384,6 +385,7 @@ textarea {
     width: 100%;
     height: 50px;
     margin-top: 20px;
+   
    
 }
 .TaskExpireDiv {
@@ -404,6 +406,8 @@ textarea {
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
+    padding-top:15px;
+   
     font-family: 'Poppins', sans-serif;
 }
 
@@ -429,9 +433,23 @@ label {
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
+    padding-top:15px;
+    
     font-family: 'Poppins', sans-serif;
 }
 
 /**---------------------Edit Task------------------*/
 
 
+/*Task not found*/
+.taskNotNoFound{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    color:ghostwhite;
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    font-size:3em;
+   
+}
