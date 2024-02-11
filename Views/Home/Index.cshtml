@@ -32,7 +32,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="completed">Completed:</label>
+                                <label for="completed">Completed</label>
                                 <select class="form-control" id="completed" name="iscompleted">
                                     <option>Completed or Not Completed</option>
                                     <option value="true">Completed</option>
@@ -40,13 +40,19 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="startDate">Start Date:</label>
+                                <label for="startDate" style="color:black;">First Date</label>
                                 <input type="date" class="form-control" id="startDate" name="startDate">
                             </div>
+                            @*<div class="form-check mt-10">
+                                <label class="form-check-label" for="disableEndDate" style="color:#000;">Disable End Date</label>
+                                <input type="checkbox" class="form-check-input" id="disableEndDate" onchange="toggleEndDate()">
+                            </div>*@
                             <div class="form-group">
-                                <label for="endDate">End Date:</label>
+                                <label for="endDate" style="color:black;">Interval Date</label>
                                 <input type="date" class="form-control" id="endDate" name="endDate">
                             </div>
+
+
                             <br />
                             <hr />
                             <button type="submit" class="btn btn-success">Apply</button>
@@ -112,7 +118,6 @@
                         </a>
                     </div>
                 </div>
-
             }
 
         </div>
@@ -133,6 +138,9 @@
                         <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
                             <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount })">Last</a>
                         </li>
+
+             
+                    <a style="margin-left:20px;" class="btn btn-primary" asp-controller="Home" asp-action="Index">Back</a>
                     </ul>
                 </nav>
             </div>
@@ -151,7 +159,7 @@
     var yyyy = today.getFullYear();
     var minDate = yyyy + '-' + mm + '-' + dd;
 
-    document.getElementById('startDate').min = '1900-01-01'; // Set a past date, adjust as needed
+    document.getElementById('startDate').min = '1900-01-01'; 
     document.getElementById('endDate').min = minDate;
 
     document.getElementById('startDate').addEventListener('change', function () {
@@ -161,10 +169,17 @@
     document.getElementById('endDate').addEventListener('change', function () {
         document.getElementById('startDate').max = this.value;
     });
+          /**********************Disable end date*************************** */
+    //function toggleEndDate() {
+    //    var endDateInput = document.getElementById("endDate");
+    //    var disableEndDateCheckbox = document.getElementById("disableEndDate");
 
-
-
-
+    //    if (disableEndDateCheckbox.checked) {
+    //        endDateInput.disabled = true;
+    //    } else {
+    //        endDateInput.disabled = false;
+    //    }
+    //}
 
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -230,11 +245,6 @@
                 });
             });
         });
-
-
-
-
-
 </script>
 
 

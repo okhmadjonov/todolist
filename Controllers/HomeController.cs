@@ -61,18 +61,18 @@ namespace Todolist.Controllers
                 }
 
                 
-                if (startDate.HasValue)
+                if (startDate.HasValue && endDate.HasValue == false)
                 {
-                    tasks = tasks.Where(t => t.StartDate >= startDate.Value).ToList();
+                    tasks = tasks.Where(t => t.StartDate == startDate.Value).ToList();
+                    Console.WriteLine(tasks);
                 }
 
-               
-                if (endDate.HasValue)
-                {
-                    tasks = tasks.Where(t => t.EndDate <= endDate.Value).ToList();
+                if (startDate.HasValue && endDate.HasValue)
+                { 
+                 tasks = tasks.Where(t => t.StartDate >= startDate.Value && t.StartDate <= endDate.Value).ToList();
                 }
 
-               
+
                 if (tasks.Count() == 0)
                 {
                     tasksFound = false;
@@ -89,12 +89,12 @@ namespace Todolist.Controllers
 
 
 
+
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Add(Models.Task taskDto)
@@ -109,7 +109,6 @@ namespace Todolist.Controllers
                 return View(taskDto);
             }
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

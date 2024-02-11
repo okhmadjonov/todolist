@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T84BhChbGrz75361gdWX642mXoXLhlShIUQ6YDGHWzZh2hKQ5BkLwK2mTXh1/5lwGqNypcLdJ56ZQFuHgWi9ig==",
+  "dgSpecHash": "CvP8876aJW0KX2iv8aT6Nax+qVtuARjnMbQdn+MQnELUTtCqN/8NmKLPEG4+amgaDiklfeApV2rAxJt5elVplQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nemo\\Desktop\\2024\\.net\\todolist\\ToDoList\\Todolist.csproj",
+  "projectFilePath": "C:\\Users\\nemo\\Desktop\\2024\\asp.net\\todolist\\Todolist\\Todolist.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nemo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\nemo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -45,7 +45,6 @@
 
 
 
-
 <script type="text/javascript">
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -53,14 +52,22 @@
     var yyyy = today.getFullYear();
     var minDate = yyyy + '-' + mm + '-' + dd;
 
-    document.getElementById('taskCreateDate').min = minDate;
-    document.getElementById('taskExpireDate').min = minDate;
-
     document.getElementById('taskCreateDate').addEventListener('change', function () {
+      
         document.getElementById('taskExpireDate').min = this.value;
+
+       
+        if (document.getElementById('taskExpireDate').value < this.value) {
+            document.getElementById('taskExpireDate').value = this.value;
+        }
     });
 
     document.getElementById('taskExpireDate').addEventListener('change', function () {
-        document.getElementById('taskCreateDate').max = this.value;
+        
+        if (this.value < document.getElementById('taskCreateDate').value) {
+            this.value = document.getElementById('taskCreateDate').value;
+        }
     });
 </script>
+
+
